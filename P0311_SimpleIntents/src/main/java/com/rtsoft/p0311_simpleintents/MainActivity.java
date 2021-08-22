@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnWeb:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com"));
-                startActivity(intent);
+                //intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com"));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com")));
                 break;
             case R.id.btnMap:
                 intent = new Intent();
