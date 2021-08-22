@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/P0181_DynamicLayout3" />
+            <option value="$PROJECT_DIR$/P0241_TwoActivityState" />
+            <option value="$PROJECT_DIR$/P0261_IntentFilter" />
+            <option value="$PROJECT_DIR$/P0271_GetIntentAction" />
+            <option value="$PROJECT_DIR$/P0281_IntentExtras" />
+            <option value="$PROJECT_DIR$/P0301_ActivityResult" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/p0001firstproject" />
+            <option value="$PROJECT_DIR$/p0111_resvalues" />
+            <option value="$PROJECT_DIR$/p0141_1_menu_v2" />
+            <option value="$PROJECT_DIR$/p0141_menuadv" />
+            <option value="$PROJECT_DIR$/p0151_contextmenu" />
+            <option value="$PROJECT_DIR$/p0161_dynamiclayout" />
+            <option value="$PROJECT_DIR$/p0191_simplecalculator" />
+            <option value="$PROJECT_DIR$/p0211twoactivity" />
+            <option value="$PROJECT_DIR$/p0211twoactivity1" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

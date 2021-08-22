@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group >
+        <item
+            android:id="@+id/menu_bol"
+            android:onClick="menu"
+            android:title="Больше"
+            />
+        <item
+            android:id="@+id/menu_std"
+            android:onClick="menu"
+            android:title="std" />
+        <item
+            android:id="@+id/menu_men"
+            android:onClick="menu"
+            android:title="Меньше" />
+    </group>
+    <item
+        android:id="@+id/menu_exit"
+        android:onClick="menu"
+        android:title="Выход" />
+</menu>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FirstProject</string>
+    <string name="main_menu">Hello world!</string>
+    <string name="text_view_main">My text</string>
+    <string name="main_text_main_menu">this is not my text</string>
+    <string name="text_btn2">Button</string>
+    <string name="text_after_pressed_btn2">Button2 pressed</string>
+    <string name="text_after_btn1_pressed">Button1 pressed</string>
+</resources>
