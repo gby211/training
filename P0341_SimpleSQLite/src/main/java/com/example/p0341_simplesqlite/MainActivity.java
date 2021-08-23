@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
@@ -122,8 +123,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 cv.put(MYTABLE_NAME, name);
                 cv.put(MYTABLE_EMAIL, email);
                 //обновляем по id
-                int updCount = db.update(DB_NAME, cv, "id = ?", new String[]{id});
-                Log.d(LOG_TAG, "updated rows count = " + updCount);
+                try {
+                    int updCount = db.update(DB_NAME, cv, "_id = ?", new String[]{id});
+                    Log.d(LOG_TAG, "updated rows count = " + updCount);
+                    if (updCount == 0){
+                        cv.put(MYTABLE_ID,id);
+                        long updCount1 =  db.insert(DB_NAME,null,cv);
+                        Log.d(LOG_TAG, "new rows count = " + String.valueOf(updCount1));
+                    }
+
+                }catch (SQLiteException e){
+
+                }
+
                 break;
             case R.id.btnDel:
                 if (id.equalsIgnoreCase("")) {
@@ -131,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 Log.d(LOG_TAG, "--- Delete from mytable: ---");
                 // удаляем по id
-                int delCount = db.delete(DB_NAME,"id = ?", new String[]{id});
+                int delCount = db.delete(DB_NAME,"_id = ?", new String[]{id});
                 Log.d(LOG_TAG, "deleted rows count = " + delCount);
                 break;
 
