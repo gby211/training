@@ -19,9 +19,10 @@
 
         <Spinner
             android:id="@+id/etID"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1" />
 
         <Button
             android:layout_marginHorizontal="15dp"
@@ -107,10 +108,4 @@
             android:text="Clear" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone" />
 </LinearLayout>

@@ -76,13 +76,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         c.close();
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr1);
+        ArrayAdapter<String> adapter ;
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         etID.setAdapter(adapter);
         etID.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                etID.setSelection(i);
+
             }
 
             @Override
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
 
-
-
+    class Spin {
 
     }
 
