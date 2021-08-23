@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import static com.example.p0341_simplesqlite.DBHelper.DB_NAME;
 import static com.example.p0341_simplesqlite.DBHelper.MYTABLE_EMAIL;
@@ -24,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String LOG_TAG = "myLogs";
 
     Button btnAdd, btnRead, btnClear, btnUpd, btnDel;
-    EditText etName, etEmail, etID;
+    EditText etName, etEmail;
+    Spinner etID;
 
     DBHelper dbHelper;
 
@@ -50,9 +55,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         etName = (EditText) findViewById(R.id.etName);
         etEmail = (EditText) findViewById(R.id.etEmail);
-        etID = (EditText) findViewById(R.id.etID);
 
+        etID = findViewById(R.id.etID);
         dbHelper = new DBHelper(this);
+
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor c = db.query(DB_NAME, null, null, null, null, null, null);
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, DB_NAME);
+        String[] arr1 = new String[numRows];
+        if (c.moveToFirst()) {
+            int tmp = 0;
+            int idColIndex = c.getColumnIndex(MYTABLE_ID);
+            do {
+                arr1[tmp] = String.valueOf(c.getInt(idColIndex));
+                tmp++;
+            } while (c.moveToNext());
+        } else
+            Log.d(LOG_TAG, "0 rows");
+        c.close();
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr1);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        etID.setAdapter(adapter);
+        etID.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                etID.setSelection(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
 
 
     }
@@ -66,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // получаем данные из полей ввода
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();
-        String id = etID.getText().toString();
+        String id = etID.getSelectedItem().toString();
 
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -149,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
+        //adapter.notifyDataSetChanged();
         // закрываем подключение к БД
 //        dbHelper.close();
 
