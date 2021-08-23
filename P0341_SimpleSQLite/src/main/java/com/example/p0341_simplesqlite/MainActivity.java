@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String LOG_TAG = "myLogs";
 
-    Button btnAdd, btnRead, btnClear;
-    EditText etName, etEmail;
+    Button btnAdd, btnRead, btnClear, btnUpd, btnDel;
+    EditText etName, etEmail, etID;
 
     DBHelper dbHelper;
 
@@ -38,13 +38,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRead = findViewById(R.id.btnRead);
         btnRead.setOnClickListener(this);
 
-        btnRead = findViewById(R.id.btnRead);
-        btnRead.setOnClickListener(this);
+        btnClear = findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(this);
+
+        btnUpd = (Button) findViewById(R.id.btnUpd);
+        btnUpd.setOnClickListener(this);
+
+        btnDel = (Button) findViewById(R.id.btnDel);
+        btnDel.setOnClickListener(this);
 
         etName = (EditText) findViewById(R.id.etName);
         etEmail = (EditText) findViewById(R.id.etEmail);
+        etID = (EditText) findViewById(R.id.etID);
 
         dbHelper = new DBHelper(this);
+
+
     }
 
     @Override
@@ -56,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // получаем данные из полей ввода
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();
+        String id = etID.getText().toString();
 
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -83,10 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int idColIndex = c.getColumnIndex(MYTABLE_ID);
                     int nameColIndex = c.getColumnIndex(MYTABLE_NAME);
                     int emailColIndex = c.getColumnIndex(MYTABLE_EMAIL);
-                    Log.d(LOG_TAG,
-                            "ID = " + c.getColumnIndex(MYTABLE_ID) +
-                                    ", name = " + c.getColumnIndex(MYTABLE_NAME) +
-                                    ", email = " + c.getColumnIndex(MYTABLE_EMAIL)+"айди сверху\n");
                     do {
                         // получаем значения по номерам столбцов и пишем все в лог
                         Log.d(LOG_TAG,
@@ -106,9 +112,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int clearCount = db.delete(DB_NAME, null, null);
                 Log.d(LOG_TAG, "deleted rows count = " + clearCount);
                 break;
+            case R.id.btnUpd:
+                if (id.equalsIgnoreCase("")) {
+                    break;
+                }
+                Log.d(LOG_TAG, "--- Update mytable: ---");
+                // подготовим значения для обновления
+
+                cv.put(MYTABLE_NAME, name);
+                cv.put(MYTABLE_EMAIL, email);
+                //обновляем по id
+                int updCount = db.update(DB_NAME, cv, "id = ?", new String[]{id});
+                Log.d(LOG_TAG, "updated rows count = " + updCount);
+                break;
+            case R.id.btnDel:
+                if (id.equalsIgnoreCase("")) {
+                    break;
+                }
+                Log.d(LOG_TAG, "--- Delete from mytable: ---");
+                // удаляем по id
+                int delCount = db.delete(DB_NAME,"id = ?", new String[]{id});
+                Log.d(LOG_TAG, "deleted rows count = " + delCount);
+                break;
+
+
         }
         // закрываем подключение к БД
-        dbHelper.close();
+//        dbHelper.close();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dbHelper.close();
     }
 }
