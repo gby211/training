@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put("val", value);
         db.insert(table, null, cv);
+
     }
 
     @SuppressLint("Range")
