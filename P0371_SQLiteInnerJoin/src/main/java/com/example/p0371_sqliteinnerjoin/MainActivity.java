@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     int[] position_salary = { 15000, 13000, 10000, 8000 };
 
     DBHelper dbh;
+    SQLiteDatabase db;
     // данные для таблицы людей
     String[] people_name = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис", "Костя", "Игорь" };
     int[] people_posid = { 2, 3, 2, 2, 3, 1, 2, 4 };
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbh = new DBHelper(this);
-        SQLiteDatabase db = dbh.getWritableDatabase();
+        db = dbh.getWritableDatabase();
 
         // Описание курсора
         Cursor c;
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Cursor is null");
     }
 
+
+
     // класс для работы с БД
     class DBHelper extends SQLiteOpenHelper {
 
@@ -146,8 +149,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void ggs(View v){
-        SQLiteDatabase db = dbh.getWritableDatabase();
+    public void ggs(View view){
+        db.execSQL("DROP TABLE IF EXISTS mytable");
+        db.close();
     }
+    public void createTable1(View view) {
+    db = dbh.getWritableDatabase();
+
+    }
+
 
 }
