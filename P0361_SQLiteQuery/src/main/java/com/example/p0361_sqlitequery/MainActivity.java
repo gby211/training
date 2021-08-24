@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // население
                     case R.id.rPeople:
                         Log.d(LOG_TAG, "--- Сортировка по населению ---");
-                        orderBy = "people";
+                        orderBy = "people DESC";
                         break;
                     // регион
                     case R.id.rRegion:
