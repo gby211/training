@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
     DBHelper dbh;
     SQLiteDatabase db;
 
-    /**
-     * Called when the activity is first created.
-     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
