@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         // конструктор суперкласса
-        super(context, "myDB", null, 1);
+        super(context, "mytable", null, 1);
     }
 
     public void onCreate(SQLiteDatabase db) {

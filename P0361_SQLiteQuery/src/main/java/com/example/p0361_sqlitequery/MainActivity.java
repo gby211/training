@@ -2,6 +2,7 @@ package com.example.p0361_sqlitequery;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,9 +14,9 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import static com.example.p0361_sqlitequery.DBHelper.DB_NAME;
-import static com.example.p0361_sqlitequery.DBHelper.MYTABLE_PEOPLE;
 import static com.example.p0361_sqlitequery.DBHelper.MYTABLE_ID;
 import static com.example.p0361_sqlitequery.DBHelper.MYTABLE_NAME;
+import static com.example.p0361_sqlitequery.DBHelper.MYTABLE_PEOPLE;
 import static com.example.p0361_sqlitequery.DBHelper.MYTABLE_REGION;
 
 
@@ -70,24 +71,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db = dbHelper.getWritableDatabase();
 
         // проверка существования записей и заполнение
-        Cursor c = db.query("mytable", null, null, null, null, null, null);
+        Cursor c = db.query(DB_NAME, null, null, null, null, null, null);
         if (c.getCount() == 0) {
             ContentValues cv = new ContentValues();
             // заполним таблицу
             for (int i = 0; i < 10; i++) {
-                cv.put("name", name[i]);
-                cv.put("people", people[i]);
-                cv.put("region", region[i]);
-                Log.d(LOG_TAG, "id = " + db.insert("mytable", null, cv));
+                cv.put(MYTABLE_NAME, name[i]);
+                cv.put(MYTABLE_PEOPLE, people[i]);
+                cv.put(MYTABLE_REGION, region[i]);
+                Log.d(LOG_TAG, MYTABLE_ID+" = " + db.insert(DB_NAME, null, cv));
             }
         }
         c.close();
-        dbHelper.close();
+        //dbHelper.close();
 
         // эмулируем нажатие кнопки btnAll
         onClick(btnAll);
     }
 
+    @SuppressLint("Range")
     @Override
     public void onClick(View view) {
         db = dbHelper.getWritableDatabase();
@@ -159,6 +161,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 c = db.query("mytable", null, null, null, null, null, orderBy);
                 break;
         }
+
+        if (c!= null){
+            if(c.moveToFirst()){
+                String str;
+                do {
+                    str = "";
+                    for(String cn : c.getColumnNames()){
+                        str += cn +" = " + c.getString(c.getColumnIndex(cn)) + "; ";
+                    }
+                    Log.d(LOG_TAG, str);
+                }while (c.moveToNext());
+            }
+            c.close();
+        } else
+            Log.d(LOG_TAG, "Cursor is null");
 
     }
 
