@@ -2,6 +2,7 @@ package com.example.p0371_sqliteinnerjoin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     String[] position_name = { "Директор", "Программер", "Бухгалтер", "Охранник" };
     int[] position_salary = { 15000, 13000, 10000, 8000 };
 
-
+    DBHelper dbh;
     // данные для таблицы людей
     String[] people_name = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис", "Костя", "Игорь" };
     int[] people_posid = { 2, 3, 2, 2, 3, 1, 2, 4 };
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DBHelper dbh = new DBHelper(this);
+        dbh = new DBHelper(this);
         SQLiteDatabase db = dbh.getWritableDatabase();
 
         // Описание курсора
@@ -55,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 + "from people as PL "
                 + "inner join position as PS "
                 + "on PL.posid = PS.id "
-                + "where salary > ?";
+                + "where salary > ?"
+                + "order by Salary DESC";
         c = db.rawQuery(sqlQuery, new String[] {"12000"});
         logCursor(c);
         c.close();
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // используем query
         Log.d(LOG_TAG, "--- INNER JOIN with query---");
         String table = "people as PL inner join position as PS on PL.posid = PS.id";
-        String columns[] = { "PL.name as Name", "PS.name as Position", "salary as Salary" };
+        String[] columns = { "PL.name as Name", "PS.name as Position", "salary as Salary" };
         String selection = "salary < ?";
         String[] selectionArgs = {"12000"};
         c = db.query(table, columns, selection, selectionArgs, null, null, null);
@@ -74,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "--- ---");
 
         // закрываем БД
-        dbh.close();
+        //dbh.close();
     }
 
     // вывод в лог данных из курсора
+    @SuppressLint("Range")
     void logCursor(Cursor c) {
         if (c != null) {
             if (c.moveToFirst()) {
@@ -140,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         }
+    }
+
+    public void ggs(View v){
+        SQLiteDatabase db = dbh.getWritableDatabase();
     }
 
 }
