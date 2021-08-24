@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Log.d(LOG_TAG, ex.getClass() + " error: " + ex.getMessage());
         }
-
     }
 
     void insert(SQLiteDatabase db, String table, String value) {
