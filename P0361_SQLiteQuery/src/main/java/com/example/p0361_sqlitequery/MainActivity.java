@@ -190,9 +190,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 do {
                     str = "";
                     for (String cn : c.getColumnNames()) {
+                        Log.d(LOG_TAG, cn);
+                        Log.d(LOG_TAG, String.valueOf(c.getColumnIndex(cn)));
                         str += cn + " = " + c.getString(c.getColumnIndex(cn)) + "; ";
                     }
-                    Log.d(LOG_TAG, str);
+                    Log.d(LOG_TAG, str+"\n\n");
                 } while (c.moveToNext());
             }
             c.close();

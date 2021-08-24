@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.rtsoft.p0331_sharedpreferences.R;
+import com.example.p0331_sharedpreferences.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

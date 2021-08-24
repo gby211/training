@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rtsoft.p0311_simpleintents">
+    package="com.example.p0311_simpleintents">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Training">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.p0311_simpleintents.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
