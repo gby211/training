@@ -27,29 +27,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void myActions() {
-        try {
-            db = dbh.getWritableDatabase();
-            delete(db, "mytable");
+        /** нельзя создавать новые подключения к дб если идёт транзакция */
+        db = dbh.getWritableDatabase();
+        delete(db, "mytable");
+        db.beginTransaction();
+        insert(db, "mytable", "val1");
+        db.setTransactionSuccessful();
+        insert(db, "mytable", "val2");
+        db.endTransaction();
+        insert(db, "mytable", "val3");
+        read(db, "mytable");
+        dbh.close();
 
-            db.beginTransaction();
-            insert(db, "mytable", "val1");
-
-            Log.d(LOG_TAG, "create DBHelper");
-            DBHelper dbh2 = new DBHelper(this);
-            Log.d(LOG_TAG, "get db");
-            SQLiteDatabase db2 = dbh2.getWritableDatabase();
-            read(db2, "mytable");
-            dbh2.close();
-
-            db.setTransactionSuccessful();
-            db.endTransaction();
-
-            read(db, "mytable");
-            dbh.close();
-
-        } catch (Exception ex) {
-            Log.d(LOG_TAG, ex.getClass() + " error: " + ex.getMessage());
-        }
     }
 
     void insert(SQLiteDatabase db, String table, String value) {
@@ -81,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void ggs(View view) {
         dbh.close();
+        db.close();
     }
 
     public void ggs1(View view) {
+        dbh = new DBHelper(this);
         db = dbh.getWritableDatabase();
     }
 
