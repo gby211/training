@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
-        //adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged(); TODO автообновление адаптера
         // закрываем подключение к БД
 //        dbHelper.close();
 

@@ -1,4 +1,4 @@
-package com.rtsoft.p0331_sharedpreferences;
+package com.example.p0331_sharedpreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.rtsoft.p0331_sharedpreferences.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
