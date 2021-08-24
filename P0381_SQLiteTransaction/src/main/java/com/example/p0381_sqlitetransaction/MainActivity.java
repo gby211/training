@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         cv.put("val", value);
         db.insert(table, null, cv);
 
+
     }
 
     @SuppressLint("Range")
