@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             "Европа", "Африка", "Европа", "Европа", "Америка"};
 
 
-    Button btnAll, btnFunc, btnPeople, btnSort, btnGroup, btnHaving;
+    Button btnAll, btnFunc, btnPeople, btnSort, btnGroup, btnHaving,btnv2NasPo;
     EditText etFunc, etPeople, etRegionPeople;
-    RadioGroup rgSort;
+    RadioGroup rgSort,rgNasPoReg;
 
     DBHelper dbHelper;
     SQLiteDatabase db;
@@ -61,11 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnHaving = (Button) findViewById(R.id.btnHaving);
         btnHaving.setOnClickListener(this);
 
+        btnv2NasPo = findViewById(R.id.btnv2NasPo);
+        btnv2NasPo.setOnClickListener(this);
+
         etFunc = (EditText) findViewById(R.id.etFunc);
         etPeople = (EditText) findViewById(R.id.etPeople);
         etRegionPeople = (EditText) findViewById(R.id.etRegionPeople);
 
         rgSort = (RadioGroup) findViewById(R.id.rgSort);
+        rgNasPoReg = findViewById(R.id.rgNasPoReg);
+
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 cv.put(MYTABLE_NAME, name[i]);
                 cv.put(MYTABLE_PEOPLE, people[i]);
                 cv.put(MYTABLE_REGION, region[i]);
-                Log.d(LOG_TAG, MYTABLE_ID+" = " + db.insert(DB_NAME, null, cv));
+                Log.d(LOG_TAG, MYTABLE_ID + " = " + db.insert(DB_NAME, null, cv));
             }
         }
         c.close();
@@ -122,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnPeople:
                 Log.d(LOG_TAG, "--- Население больше " + sPeople + " ---");
-                c = db.query(DB_NAME, null, "MYTABLE_PEOPLE > " + sPeople, null, null, null,
+                c = db.query(DB_NAME, null, MYTABLE_PEOPLE + " > " + sPeople, null, null, null,
                         null);
                 break;
             case R.id.btnGroup:
@@ -134,10 +139,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnHaving:
                 Log.d(LOG_TAG, "--- Регионы с населением больше " + sRegionPeople
                         + " ---");
-                columns = new String[]{MYTABLE_REGION, "sum(people) people"};
+                columns = new String[]{MYTABLE_REGION, "sum(people) as people"};
                 groupBy = MYTABLE_REGION;
-                having = "sum(people) > " + sPeople;
-                c = db.query(DB_NAME, columns, selection, null, groupBy, having, null);
+                having = "sum(people) > " + sRegionPeople;
+                c = db.query(DB_NAME, columns, null, null, groupBy, having, null);
                 break;
             case R.id.btnSort:
                 // сортировка по
@@ -160,18 +165,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 c = db.query("mytable", null, null, null, null, null, orderBy);
                 break;
+            case R.id.btnv2NasPo:
+                String strTmp = "";
+                switch (rgNasPoReg.getCheckedRadioButtonId()) {
+                    case R.id.radioButtonBol:
+                        strTmp += "> " + sRegionPeople;
+                        break;
+                    case R.id.radioButtonMen:
+                        strTmp += "< " + sRegionPeople;
+                        break;
+                }
+                Log.d(LOG_TAG, "--- Регионы с населением больше v22222222" + sRegionPeople
+                        + " ---");
+                String strSql = "SELECT region, sum(people) as people FROM mytable GROUP BY region HAVING sum(people) "+strTmp;
+//                db.execSQL(strSql);
+                c = db.rawQuery(strSql,null);
+                break;
+
         }
 
-        if (c!= null){
-            if(c.moveToFirst()){
+        if (c != null) {
+            if (c.moveToFirst()) {
                 String str;
                 do {
                     str = "";
-                    for(String cn : c.getColumnNames()){
-                        str += cn +" = " + c.getString(c.getColumnIndex(cn)) + "; ";
+                    for (String cn : c.getColumnNames()) {
+                        str += cn + " = " + c.getString(c.getColumnIndex(cn)) + "; ";
                     }
                     Log.d(LOG_TAG, str);
-                }while (c.moveToNext());
+                } while (c.moveToNext());
             }
             c.close();
         } else
