@@ -17,15 +17,15 @@ public class MainActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
 
     // данные для таблицы должностей
-    int[] position_id = { 1, 2, 3, 4 };
-    String[] position_name = { "Директор", "Программер", "Бухгалтер", "Охранник" };
-    int[] position_salary = { 15000, 13000, 10000, 8000 };
+    int[] position_id = {1, 2, 3, 4};
+    String[] position_name = {"Директор", "Программер", "Бухгалтер", "Охранник"};
+    int[] position_salary = {15000, 13000, 10000, 8000};
 
     DBHelper dbh;
     SQLiteDatabase db;
     // данные для таблицы людей
-    String[] people_name = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис", "Костя", "Игорь" };
-    int[] people_posid = { 2, 3, 2, 2, 3, 1, 2, 4 };
+    String[] people_name = {"Иван", "Марья", "Петр", "Антон", "Даша", "Борис", "Костя", "Игорь"};
+    int[] people_posid = {2, 3, 2, 2, 3, 1, 2, 4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 + "on PL.posid = PS.id "
                 + "where salary > ?"
                 + "order by Salary DESC";
-        c = db.rawQuery(sqlQuery, new String[] {"12000"});
+        c = db.rawQuery(sqlQuery, new String[]{"12000"});
         logCursor(c);
         c.close();
         Log.d(LOG_TAG, "--- ---");
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         // используем query
         Log.d(LOG_TAG, "--- INNER JOIN with query---");
         String table = "people as PL inner join position as PS on PL.posid = PS.id";
-        String[] columns = { "PL.name as Name", "PS.name as Position", "salary as Salary" };
+        String[] columns = {"PL.name as Name", "PS.name as Position", "salary as Salary"};
         String selection = "salary < ?";
         String[] selectionArgs = {"12000"};
         c = db.query(table, columns, selection, selectionArgs, null, null, null);
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         } else
             Log.d(LOG_TAG, "Cursor is null");
     }
-
 
 
     // класс для работы с БД
@@ -149,12 +148,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void ggs(View view){
+    public void ggs(View view) {
         db.execSQL("DROP TABLE IF EXISTS mytable");
         db.close();
     }
+
     public void createTable1(View view) {
-    db = dbh.getWritableDatabase();
+        db = dbh.getWritableDatabase();
 
     }
 
