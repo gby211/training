@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception ex) {
             Log.d(LOG_TAG, ex.getClass() + " error: " + ex.getMessage());
-        };
+        }
 
     }
 
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     + "id integer primary key autoincrement,"
                     + "val text"
                     + ");");
+
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
