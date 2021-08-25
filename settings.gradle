@@ -24,3 +24,4 @@ include ':app'
 rootProject.name = "training"
 include ':P0401_LayoutInflater'
 include ':P0411_LayoutInflaterList'
+include ':P0421_SimpleList'

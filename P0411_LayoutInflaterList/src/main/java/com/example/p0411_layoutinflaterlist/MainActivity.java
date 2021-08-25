@@ -23,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     int[] colors = new int[2];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        colors[0] = Color.parseColor("#ebebeb");
+        colors[1] = Color.parseColor("#cccccc");
+
 
         LinearLayout linLayout = findViewById(R.id.linLayout);
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 100; i++) {
 
             Random rnd = new Random();
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
             Log.d("myLogs", "i = " + i);
             View item = ltInflater.inflate(R.layout.item, linLayout, false);
@@ -47,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
             tvSalary.setText("Оклад: " + String.valueOf(salary[i%8]));
             item.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
 
-            item.setBackgroundColor(color);
-            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            tvSalary.setBackgroundColor(color);
-            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            tvPosition.setBackgroundColor(color);
-            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            tvName.setBackgroundColor(color);
+            item.setBackgroundColor(colors[i%2]);
+//            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+//            tvSalary.setBackgroundColor(color);
+//            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+//            tvPosition.setBackgroundColor(color);
+//            color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+//            tvName.setBackgroundColor(color);
 
             linLayout.addView(item);
 
