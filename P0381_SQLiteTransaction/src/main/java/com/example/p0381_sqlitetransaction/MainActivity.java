@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void myActions() {
-        /** нельзя создавать новые подключения к дб если идёт транзакция */
+        /* нельзя создавать новые подключения к дб если идёт транзакция */
         db = dbh.getWritableDatabase();
         delete(db, "mytable");
         db.beginTransaction();
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                     + "id integer primary key autoincrement,"
                     + "val text"
                     + ");");
-
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

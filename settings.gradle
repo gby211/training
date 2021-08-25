@@ -22,3 +22,4 @@ include ':p0111_resvalues'
 include ':p0001firstproject'
 include ':app'
 rootProject.name = "training"
+include ':P0401_LayoutInflater'
