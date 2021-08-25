@@ -25,3 +25,4 @@ rootProject.name = "training"
 include ':P0401_LayoutInflater'
 include ':P0411_LayoutInflaterList'
 include ':P0421_SimpleList'
+include ':P0431_SimpleListChoice'
