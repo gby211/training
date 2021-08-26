@@ -3,6 +3,7 @@ package com.example.p0452_expandablelist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 
 import java.util.ArrayList;
@@ -70,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         String[] childFrom = new String[]{"monthName"};
         int [] childTo = new int[]{R.id.text1};
-        SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(this, groupDataList, R.layout.my_list_item, groupFrom, groupTo, childDataList, R.layout.my_expandeble_list_item, childFrom, new int[]{R.id.text1});
+        SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(this, groupDataList, R.layout.my_expandeble_list_item, groupFrom, groupTo, childDataList, R.layout.my_list_item, childFrom, new int[]{R.id.text1});
 
+        ExpandableListView exListView = findViewById(R.id.tvMain);
+        exListView.setAdapter(adapter);
     }
 }
