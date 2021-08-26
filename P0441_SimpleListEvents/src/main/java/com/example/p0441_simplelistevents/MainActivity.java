@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -43,6 +44,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Log.d(LOG_TAG, "itemSelect: nothing");
+            }
+        });
+
+        lvMain.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                Log.d(LOG_TAG, "scrollState = " + i);
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//                Log.d(LOG_TAG, "scroll: firstVisibleItem = " + i
+//                        + ", visibleItemCount" + i1
+//                        + ", totalItemCount" + i2);
             }
         });
     }
