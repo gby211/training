@@ -3,6 +3,8 @@ package com.example.p0461_expandablelistevents;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
@@ -27,5 +29,48 @@ public class MainActivity extends AppCompatActivity {
 
         elvMain = (ExpandableListView) findViewById(R.id.elvMain);
         elvMain.setAdapter(adapter);
+
+        //нажатие на эллемент
+        elvMain.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.d(LOG_TAG, "onChildClick groupPosition = " + groupPosition +
+                        " childPosition = " + childPosition +
+                        " id = " + id);
+                tvInfo.setText(ah.getGroupChildText(groupPosition, childPosition));
+                return false;
+            }
+        });
+
+        //нажатие на группу
+        elvMain.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                Log.d(LOG_TAG, "onGroupClick groupPosition = " + i +
+                        " id = " + l);
+                // блокируем дальнейшую обработку события для группы с позицией 1
+                if (i == 1) return true;
+
+                return false;
+            }
+        });
+
+        //сворачивание группы
+        elvMain.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            public void onGroupCollapse(int groupPosition) {
+                Log.d(LOG_TAG, "onGroupCollapse groupPosition = " + groupPosition);
+                tvInfo.setText("Свернули " + ah.getGroupText(groupPosition));
+            }
+        });
+
+        // разворачивание группы
+        elvMain.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            public void onGroupExpand(int groupPosition) {
+                Log.d(LOG_TAG, "onGroupExpand groupPosition = " + groupPosition);
+                tvInfo.setText("Развернули " + ah.getGroupText(groupPosition));
+            }
+        });
+
+        elvMain.expandGroup(2);
     }
 }
