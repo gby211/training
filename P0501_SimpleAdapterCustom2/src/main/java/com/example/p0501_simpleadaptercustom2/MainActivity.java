@@ -1,8 +1,10 @@
 package com.example.p0501_simpleadaptercustom2;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     final String ATTRIBUTE_NAME_LL = "ll";
 
     ListView lvSimple;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,4 +50,6 @@ public class MainActivity extends AppCompatActivity {
         lvSimple =findViewById(R.id.lvSimple);
         lvSimple.setAdapter(simpleAdapter);
     }
+
+
 }

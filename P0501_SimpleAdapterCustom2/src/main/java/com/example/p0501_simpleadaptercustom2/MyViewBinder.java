@@ -4,16 +4,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MyViewBinder extends AppCompatActivity implements SimpleAdapter.ViewBinder {
-    int RED = getColor(R.color.Red);
-    int GREEN = getColor(R.color.Green);
-    int ORANGE = getResources().getColor(R.color.Orange, getTheme());
-
+class MyViewBinder extends MainActivity implements SimpleAdapter.ViewBinder {
 
     @Override
     public boolean setViewValue(View view, Object o, String s) {
+
+        int RED = view.getResources().getColor(R.color.Red,null);
+        int GREEN = view.getResources().getColor(R.color.Green,null);
+        int ORANGE = view.getResources().getColor(R.color.Orange,null);
+
         int i = 0;
         switch (view.getId()) {
             case R.id.llLoad:
@@ -22,10 +21,11 @@ public class MyViewBinder extends AppCompatActivity implements SimpleAdapter.Vie
                 else if (i < 70) view.setBackgroundColor(ORANGE);
                 else
                     view.setBackgroundColor(GREEN);
-                // ProgressBar
+                return true;
+            // ProgressBar
             case R.id.pbLoad:
-                i = (Integer) o;
-                ((ProgressBar) view).setProgress(i);
+                i = ((Integer) o).intValue();
+                ((ProgressBar)view).setProgress(i);
                 return true;
         }
         return false;
