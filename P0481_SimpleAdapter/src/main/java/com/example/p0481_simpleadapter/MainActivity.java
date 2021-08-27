@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         // массивы данных
         String[] texts = {"sometext 1", "sometext 2", "sometext 3",
-                "sometext 4", "sometext 5","sometext 6","sometext 7"};
-        boolean[] checked = {true, false, false, true, false,false,false};
+                "sometext 4", "sometext 5", "sometext 6", "sometext 7"};
+        boolean[] checked = {true, false, false, true, false, false, false};
         int img = R.drawable.ic_launcher_foreground;
 
         ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(
@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // массив имен атрибутов, из которых будут читаться данные
-        String[] from = { ATTRIBUTE_NAME_TEXT, ATTRIBUTE_NAME_CHECKED,
-                ATTRIBUTE_NAME_IMAGE, ATTRIBUTE_NAME_TEXT };
+        String[] from = {ATTRIBUTE_NAME_TEXT, ATTRIBUTE_NAME_CHECKED,
+                ATTRIBUTE_NAME_IMAGE, ATTRIBUTE_NAME_TEXT};
         // массив ID View-компонентов, в которые будут вставлять данные
-        int[] to = { R.id.tvText, R.id.cbChecked, R.id.ivImg, R.id.cbChecked };
+        int[] to = {R.id.tvText, R.id.cbChecked, R.id.ivImg, R.id.cbChecked};
 
         // создаем адаптер
         SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item,
