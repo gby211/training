@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.p0561_spinner"
+        applicationId "com.example.p0571_gridview"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -25,7 +25,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    compileSdkVersion 30
 }
 
 dependencies {
