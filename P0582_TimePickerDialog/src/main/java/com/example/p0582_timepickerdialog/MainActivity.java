@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -25,11 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setInitialDateTime();
     }
 
-    private void setInitialDateTime() {
-    }
-
 
     public void setTime(View view) {
+        new TimePickerDialog(this, t, dateAndTime.get(Calendar.HOUR_OF_DAY),
+                dateAndTime.get(Calendar.MINUTE), true).show();
     }
 
     public void setDate(View view) {
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 dateAndTime.get(Calendar.DAY_OF_MONTH))
                 .show();
     }
+
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -50,12 +51,18 @@ public class MainActivity extends AppCompatActivity {
     };
 
     // установка обработчика выбора времени
-    TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
+    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             dateAndTime.set(Calendar.MINUTE, minute);
             setInitialDateTime();
         }
     };
+
+    // установка начальных даты и времени
+    private void setInitialDateTime() {
+        currentDateTime.setText(DateUtils.formatDateTime(this, dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
+    }
 
 }
