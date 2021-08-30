@@ -3,6 +3,7 @@ package com.example.p0621_alertdialogitems;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 
 public class CustomDialog extends DialogFragment {
     String tag;
+    final String LOG_TAG = "myLogs";
+    Dialog dialog;
 
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
@@ -23,9 +26,13 @@ public class CustomDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "Create");
         final String[] catNamesArray = {"Васька", "Рыжик", "Мурзик"};
         final String[] dogNamesArray = {"Рики", "Шарик", "Хатико"};
         AlertDialog.Builder builder;
+
+
+
         switch (tag) {
             case "dialog":
                 builder = new AlertDialog.Builder(getActivity());
@@ -72,7 +79,29 @@ public class CustomDialog extends DialogFragment {
             default:
                 throw new IllegalStateException("Unexpected value: " + tag);
         }
-        return builder.create();
+        dialog = builder.create();
+
+        // обработчик отображения
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            public void onShow(DialogInterface dialog) {
+                Log.d(LOG_TAG, "Show");
+            }
+        });
+
+        // обработчик отмены
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+                Log.d(LOG_TAG, "Cancel");
+            }
+        });
+
+        // обработчик закрытия
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface dialog) {
+                Log.d(LOG_TAG, "Dismiss");
+            }
+        });
+        return dialog;
     }
 
 }
