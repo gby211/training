@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     final String LOG_TAG = "myLogs";
@@ -62,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnView:
                 myDialogFragment.show(manager, "dialog4");
+                final Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    public void run() {
+                        myDialogFragment.dismiss(); // when the task active then close the dialog
+                        timer.cancel(); // also just top the timer thread, otherwise,
+                        // you may receive a crash report
+                    }
+                }, 5000); // через 5 секунд (5000 миллисекунд), the task will be active.
                 break;
 
         }
