@@ -27,13 +27,7 @@ public class CustomDialogFragment extends DialogFragment {
         return builder
                 .setTitle("Диалоговое окно")
                 .setMessage("Для закрытия окна нажмите ОК")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                removable.remove("ггс");
-                            }
-                        }
-                )
+                .setPositiveButton("Ok", onClickListener)
                 .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -43,4 +37,11 @@ public class CustomDialogFragment extends DialogFragment {
                 .setView(R.layout.dialog)
                 .create();
     }
+
+    DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            removable.remove("ггс");
+        }
+    };
 }
