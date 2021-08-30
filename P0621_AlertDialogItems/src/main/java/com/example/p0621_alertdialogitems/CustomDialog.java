@@ -65,16 +65,8 @@ public class CustomDialog extends DialogFragment {
                 break;
             case "dialog4":
                 builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Выберите собакена")
-                        .setMultiChoiceItems(dogNamesArray, null, new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i,
-                                                boolean b) {
-                                Toast.makeText(getActivity(),
-                                        "Выбранный собакен: " + dogNamesArray[i],
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                builder.setTitle("Напишите своё имя и email и ещё что то напишите пожожда напишите так надо")
+                        .setView(R.layout.my_dialog);
                 break;
 
             default:
