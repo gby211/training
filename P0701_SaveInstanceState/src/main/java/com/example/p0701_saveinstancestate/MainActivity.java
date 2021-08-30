@@ -1,10 +1,14 @@
 package com.example.p0701_saveinstancestate;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        cnt = savedInstanceState.getInt("count");
+        Log.d(LOG_TAG, "------posle------"+ cnt);
         Log.d(LOG_TAG, "onRestoreInstanceState");
     }
 
@@ -46,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt("count",cnt);
+        Log.d(LOG_TAG, "-----------" + cnt);
         Log.d(LOG_TAG, "onSaveInstanceState");
     }
 
@@ -59,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onStop");
     }
 
-    public void onclick(View v) {
+//    @Override
+//    public void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        Log.d(LOG_TAG, "onAttachedToWindow");
+//    }
+
+    public void onClick(View v) {
+        Toast.makeText(this, "Count = " + ++cnt, Toast.LENGTH_SHORT).show();
     }
+
 }
