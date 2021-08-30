@@ -1,6 +1,9 @@
 package com.example.p0621_alertdialogitems;
 
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -27,12 +30,32 @@ public class DB {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDB;
 
-
     public DB(Context mCtx) {
         this.mCtx = mCtx;
     }
 
-    private class DBHelper extends SQLiteOpenHelper{
+    public void open() {
+        mDBHelper = new DBHelper(mCtx, DB_NAME, null, DB_VERSION);
+        mDB = mDBHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        if (mDBHelper != null) mDBHelper.close();
+    }
+
+    public Cursor getAllData(){
+        return mDB.query(DB_TABLE,null,null,null,null,null,null);
+    }
+
+    public void changeRec(int id, String txt){
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TXT,txt);
+        mDB.update(DB_TABLE,cv,COLUMN_ID + " = " + id,null);
+    }
+
+
+
+    private class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(@Nullable Context context, @Nullable String name,
                         @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -41,12 +64,18 @@ public class DB {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
+            sqLiteDatabase.execSQL(DB_CREATE);
 
+            ContentValues cv = new ContentValues();
+            for (int i = 1; i < 5; i++) {
+                cv.put(COLUMN_ID, i);
+                cv.put(COLUMN_TXT, "some string" + i);
+                sqLiteDatabase.insert(DB_TABLE, null, cv);
+            }
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
         }
     }
 }
