@@ -43,17 +43,19 @@ public class DB {
         if (mDBHelper != null) mDBHelper.close();
     }
 
-    public Cursor getAllData(){
-        return mDB.query(DB_TABLE,null,null,null,null,null,null);
+    public Cursor getAllData() {
+        return mDB.query(DB_TABLE, null, null, null, null, null, null);
     }
 
-    public void changeRec(int id, String txt){
+    public void changeRec(int id, String txt) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TXT,txt);
-        mDB.update(DB_TABLE,cv,COLUMN_ID + " = " + id,null);
+        cv.put(COLUMN_TXT, txt);
+        mDB.update(DB_TABLE, cv, COLUMN_ID + " = " + id, null);
     }
 
-
+    public Cursor getDataSortByText() {
+        return mDB.query(DB_TABLE,null,null,null,null,null,COLUMN_TXT + "DESC");
+    }
 
     private class DBHelper extends SQLiteOpenHelper {
 
