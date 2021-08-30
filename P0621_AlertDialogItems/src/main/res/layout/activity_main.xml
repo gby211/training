@@ -3,27 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btnItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onclick"
-        android:text="items"></Button>
+        android:text="list"></Button>
 
     <Button
         android:id="@+id/btnAdapter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="adapter"
+        android:text="multiple chose"
         android:onClick="onclick">
     </Button>
     <Button
         android:id="@+id/btnCursor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cursor"
+        android:text="single chose"
+        android:onClick="onclick">
+    </Button>
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="custom view"
         android:onClick="onclick">
     </Button>
 </LinearLayout>

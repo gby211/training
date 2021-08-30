@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnAdapter:
                 myDialogFragment.show(manager, "dialog2");
                 break;
+            case R.id.btnCursor:
+                myDialogFragment.show(manager, "dialog3");
+                break;
+            case R.id.btnView:
+                myDialogFragment.show(manager, "dialog4");
+                break;
 
         }
 

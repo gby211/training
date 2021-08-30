@@ -41,14 +41,42 @@ public class CustomDialog extends DialogFragment {
             case "dialog2":
                 builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Выберите собакена")
-                        .setItems(dogNamesArray, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                        .setMultiChoiceItems(dogNamesArray, null, new DialogInterface.OnMultiChoiceClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i,
+                                                        boolean b) {
+                                        Toast.makeText(getActivity(),
+                                                "Выбранный собакен: " + dogNamesArray[i],
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                        });
+                break;
+            case "dialog3":
+                builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Выберите собакена")
+                        .setSingleChoiceItems(dogNamesArray, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
                                 Toast.makeText(getActivity(),
-                                        "Выбранный собакен: " + dogNamesArray[which],
+                                        "Выбранный собакен: " + dogNamesArray[i],
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
                 break;
+            case "dialog4":
+                builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Выберите собакена")
+                        .setMultiChoiceItems(dogNamesArray, null, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i,
+                                                boolean b) {
+                                Toast.makeText(getActivity(),
+                                        "Выбранный собакен: " + dogNamesArray[i],
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                break;
+
             default:
                 throw new IllegalStateException("Unexpected value: " + tag);
         }
