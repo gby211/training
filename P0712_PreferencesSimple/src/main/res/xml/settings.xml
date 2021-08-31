@@ -1,39 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
     <CheckBoxPreference
-        android:key="chb"
-        android:summary="Description of checkbox"
-        android:title="Checkbox">
-    </CheckBoxPreference>
-    <ListPreference
-        android:entries="@array/entries"
-        android:entryValues="@array/entry_values"
-        android:key="list"
-        android:summary="Description of list"
-        android:title="List">
-    </ListPreference>
-    <PreferenceScreen
-        android:key="text_color"
-        android:title="Цвет текста"
-        android:summary="Устанавливает цвет для текста">
-
-        <CheckBoxPreference
-            android:key="text_color_black"
-            android:title="Черный"
-            android:defaultValue="true"
-            android:summary="Устанавливает черный цвет" />
-        <CheckBoxPreference
-            android:key="text_color_red"
-            android:title="Красный"
-            android:summary="Устанавливает красный цвет" />
-        <CheckBoxPreference
-            android:key="text_color_green"
-            android:title="Зеленый"
-            android:summary="Устанавливает зеленый цвет" />
-        <CheckBoxPreference
-            android:key="text_color_blue"
-            android:title="Синий"
-            android:summary="Устанавливает синий цвет" />
-    </PreferenceScreen>
+        android:defaultValue="true"
+        android:key="wifi"
+        android:summary="@string/wifi_summary"
+        android:title="@string/wifi_title"/>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="hints"
+        android:summary="@string/hints_summary"
+        android:title="@string/hints_title"/>
 </PreferenceScreen>
