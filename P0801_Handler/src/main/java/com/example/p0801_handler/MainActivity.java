@@ -44,17 +44,15 @@ public class MainActivity extends AppCompatActivity {
     public void onclick(View v) {
         switch (v.getId()) {
             case R.id.btnStart:
+                btnStart.setEnabled(false);
                 Thread t = new Thread(new Runnable() {
-                    @Override
                     public void run() {
-
                         for (int i = 1; i <= 10; i++) {
                             // долгий процесс
                             downloadFile();
-                            // обновляем TextView
-                            tvInfo.setText("Закачано файлов: " + i);
+                            h.sendEmptyMessage(i);
                             // пишем лог
-                            Log.d(LOG_TAG, "Закачано файлов: " + i);
+                            Log.d(LOG_TAG, "i = " + i);
                         }
                     }
                 });
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
 
     void downloadFile() {
         // пауза - 1 секунда
