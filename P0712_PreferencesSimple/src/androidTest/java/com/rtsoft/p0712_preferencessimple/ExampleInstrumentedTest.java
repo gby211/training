@@ -1,4 +1,4 @@
-package com.example.p0711_preferencessimple;
+package com.rtsoft.p0712_preferencessimple;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.p0711_preferencessimple", appContext.getPackageName());
+        assertEquals("com.rtsoft.p0712_preferencessimple", appContext.getPackageName());
     }
 }

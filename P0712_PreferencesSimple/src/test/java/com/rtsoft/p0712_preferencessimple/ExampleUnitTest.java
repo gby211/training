@@ -1,4 +1,4 @@
-package com.example.p0711_preferencessimple;
+package com.rtsoft.p0712_preferencessimple;
 
 import org.junit.Test;
 

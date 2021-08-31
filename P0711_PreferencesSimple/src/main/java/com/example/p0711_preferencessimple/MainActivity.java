@@ -18,4 +18,5 @@ public class MainActivity extends AppCompatActivity {
         Intent ggs = new Intent(this,PrefActivity.class);
         startActivity(ggs);
     }
+
 }
