@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         View v = getLayoutInflater().inflate(R.layout.tab_header, null);
         // и устанавливаем его, как заголовок
         tabSpec.setIndicator(v);
-        tabSpec.setContent(R.layout.tab_1);
+        tabSpec.setContent(R.id.tvTab3);
         tabHost.addTab(tabSpec);
 
         // вторая вкладка будет выбрана по умолчанию
