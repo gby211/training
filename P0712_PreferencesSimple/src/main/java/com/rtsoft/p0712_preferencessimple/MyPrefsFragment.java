@@ -11,6 +11,7 @@ public class MyPrefsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 //        addPreferencesFromResource(R.xml.settings);
-        addPreferencesFromResource(R.xml.settings2);
+//        addPreferencesFromResource(R.xml.settings2);
+        addPreferencesFromResource(R.xml.settings3);
     }
 }
