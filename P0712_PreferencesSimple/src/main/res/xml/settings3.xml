@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="chb1"
         android:summaryOff="Description of checkbox 1 off"
         android:summaryOn="Description of checkbox 1 on"
         android:title="CheckBox 1">
-    </CheckBoxPreference>
+    </SwitchPreference>
     <ListPreference
         android:dependency="chb1"
         android:entries="@array/entries"
@@ -17,6 +17,7 @@
     </ListPreference>
     <CheckBoxPreference
         android:key="chb2"
+        android:dependency="chb1"
         android:summary="Description of checkbox 2"
         android:title="CheckBox 2">
     </CheckBoxPreference>
