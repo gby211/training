@@ -2,7 +2,6 @@ package com.example.p0881_asynctaskresult;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public void onclick(View v) {
         switch (v.getId()) {
             case R.id.btnStart:
-                mt = new MyTask();
+                mt = new MyTask(this);
                 mt.execute();
                 pb.setVisibility(View.VISIBLE);
 
@@ -61,33 +59,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class MyTask extends AsyncTask<Void, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            tvInfo.setText("Begin");
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return 100500;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pb.setVisibility(View.VISIBLE);
-
-            Log.d(LOG_TAG, "Begin");
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            pb.setVisibility(View.GONE);
-            super.onPostExecute(result);
-            tvInfo.setText("End. Result = " + result);
-            Log.d(LOG_TAG, "End. Result = " + result);
-        }
-    }
 }
