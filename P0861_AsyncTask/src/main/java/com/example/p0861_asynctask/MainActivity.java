@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int tmp = 0;
+
     MyTask mt;
     TextView tvInfo;
     final String LOG_TAG = "myLogs";
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            tvInfo.setText("Begin");
+            tvInfo.setText("Begin"+ ++tmp);
             Log.d(LOG_TAG, "onPreExecute");
 
         }
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Log.d(LOG_TAG, "doInBackground");
             try{
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             Log.d(LOG_TAG, "onPostExecute");
-            tvInfo.setText("End");
+            tvInfo.setText("End"+ ++tmp);
         }
     }
 }
