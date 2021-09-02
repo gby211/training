@@ -1,16 +1,21 @@
 package com.example.p0911_asynctaskrotate;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 class MyTask extends AsyncTask<String, Integer, Void> {
 
-    private final MainActivity mainActivity;
+    WeakReference<Activity> mWeakActivity;
 
-    public MyTask(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public MyTask(Activity activity) {
+        mWeakActivity = new WeakReference<Activity>(activity);
     }
 
     @Override
@@ -19,9 +24,9 @@ class MyTask extends AsyncTask<String, Integer, Void> {
             for (int i = 1; i <= 10; i++) {
                 TimeUnit.SECONDS.sleep(1);
                 publishProgress(i);
-                Log.d("qwe", "i = " + i
+                Log.d("myLogs", "i = " + i
                         + ", MyTask: " + this.hashCode()
-                        + ", MainActivity: " + mainActivity.hashCode());
+                        + ", MainActivity: " + mWeakActivity.hashCode());
             }
 
         } catch (InterruptedException e) {
@@ -34,6 +39,7 @@ class MyTask extends AsyncTask<String, Integer, Void> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        mainActivity.tv.setText("i = " + values[0]);
+        TextView tv = mWeakActivity.get().findViewById(R.id.tv);
+        tv.setText("i = " + values[0]);
     }
 }
