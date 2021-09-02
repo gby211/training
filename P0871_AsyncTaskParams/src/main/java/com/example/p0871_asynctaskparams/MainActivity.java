@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv = findViewById(R.id.tvInfo);
     }
 
     public void onclick(View view) {
     mt = new MyTask();
     mt.execute("file_path_1", "file_path_2", "file_path_3", "file_path_4");
-
     }
 
     class MyTask extends AsyncTask<String,Integer,Void>{
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
+            tv.setText("End");
         }
 
         @Override
@@ -63,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
             tv.setText("Downloaded " + values[0] + " files");
         }
 
-        private void downloadFile (String url) throws InterruptedException{
-            TimeUnit.SECONDS.sleep(2);
+        private void downloadFile (String url) {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
