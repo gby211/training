@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,12 +14,13 @@ public class MainActivity extends AppCompatActivity {
     Fragment2 frag2;
     FragmentTransaction fTrans;
     CheckBox chbStack;
+    Button btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        btn = findViewById(R.id.btnReplace);
         frag1 = new Fragment1();
         frag2 = new Fragment2();
 
@@ -41,5 +43,8 @@ public class MainActivity extends AppCompatActivity {
         }
         if (chbStack.isChecked()) fTrans.addToBackStack(null);
         fTrans.commit();
+    }
+    public void gss(){
+     onClick(btn);
     }
 }
