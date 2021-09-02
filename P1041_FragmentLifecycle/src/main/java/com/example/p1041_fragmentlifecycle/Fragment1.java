@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 public class Fragment1 extends Fragment {
     final String LOG_TAG = "myLogs";
 
+    public Fragment1() {
+        super(R.layout.fragment1);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -25,14 +29,7 @@ public class Fragment1 extends Fragment {
         Log.d(LOG_TAG, "Fragment1 onCreate");
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "Fragment1 onCreateView");
-        return inflater.inflate(R.layout.fragment1,null);
 
-    }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
