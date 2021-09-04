@@ -24,7 +24,7 @@ public class Fragment2 extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d(LOG_TAG, "Button click in Fragment1");
+                Log.d(LOG_TAG, "Button click in Fragment2");
             }
         });
         return view;
