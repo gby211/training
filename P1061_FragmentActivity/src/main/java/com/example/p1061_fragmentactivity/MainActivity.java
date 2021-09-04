@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         Fragment fragment1 = getSupportFragmentManager().findFragmentById(R.id.fragment1);
-        ((TextView) fragment1.getView().findViewById(R.id.textView))
+        assert fragment1 != null;
+        ((TextView) fragment1.requireView().findViewById(R.id.textView))
                 .setText("Access to Fragment 1 from Activity");
 
         Fragment frag2 = getSupportFragmentManager().findFragmentById(R.id.fragment2);
