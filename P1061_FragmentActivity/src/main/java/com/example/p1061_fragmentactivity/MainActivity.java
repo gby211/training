@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Fragment2.onSomeEventListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +32,11 @@ public class MainActivity extends AppCompatActivity {
         Fragment frag2 = getSupportFragmentManager().findFragmentById(R.id.fragment2);
         ((TextView) frag2.getView().findViewById(R.id.textView))
                 .setText("Access to Fragment 2 from Activity");
+    }
+
+    @Override
+    public void someEvent(String s) {
+        Fragment frag1 = getSupportFragmentManager().findFragmentById(R.id.fragment1);
+        ((TextView)frag1.getView().findViewById(R.id.textView)).setText("Text from Fragment 2:" + s);
     }
 }

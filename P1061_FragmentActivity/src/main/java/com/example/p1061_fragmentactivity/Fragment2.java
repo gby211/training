@@ -1,5 +1,6 @@
 package com.example.p1061_fragmentactivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,18 @@ import androidx.fragment.app.Fragment;
 
 public class Fragment2 extends Fragment {
     final String LOG_TAG = "myLogs";
+    onSomeEventListener someEventListener;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            someEventListener = (onSomeEventListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString() + " must implement onSomeEventListener");
+        }
+    }
 
     @Nullable
     @Override
@@ -25,8 +38,16 @@ public class Fragment2 extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(LOG_TAG, "Button click in Fragment2");
+                someEventListener.someEvent("Test text to Fragment1");
             }
         });
         return view;
     }
+
+    public interface onSomeEventListener {
+        public void someEvent(String s);
+    }
+
+
+
 }
