@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class Fragment1 extends Fragment {
     final String LOG_TAG = "myLogs";
@@ -29,13 +33,25 @@ public class Fragment1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btn = view.findViewById(R.id.button123);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "ggs", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        ViewPager viewPager = view.findViewById(R.id.viewPager123);
+        viewPager.setAdapter(
+                new SampleFragmentPagerAdapter(getActivity().getSupportFragmentManager(), getContext()));
+
+        // Передаём ViewPager в TabLayout
+        TabLayout tabLayout = view.findViewById(R.id.tabtab);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
+
+//        Button btn = view.findViewById(R.id.button123);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "ggs", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     public void onCreate(Bundle savedInstanceState) {
