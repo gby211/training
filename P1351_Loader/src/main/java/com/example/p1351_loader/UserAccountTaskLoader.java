@@ -29,7 +29,7 @@ public class UserAccountTaskLoader extends AsyncTaskLoader<List<UserAccount>> {
         list.add(new UserAccount("jerry", "jerry@example.com", "Jerry"));
         list.add(new UserAccount("donald", "donald@example.com", "Donald"));
 
-        SystemClock.sleep(2000); // 2 Seconds.
+        SystemClock.sleep(10000); // 2 Seconds.
 
         return list;
     }
