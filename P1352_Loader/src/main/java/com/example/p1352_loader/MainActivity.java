@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
     final String LOG_TAG = "myLogs";
-    static final int LOADER_TIME_ID = 1;
+    static final int LOADER_TIME_ID = 123;
 
     TextView tvTime;
     RadioGroup rgTimeFormat;
