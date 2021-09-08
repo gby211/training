@@ -7,6 +7,7 @@ import androidx.loader.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     TextView tvTime;
     RadioGroup rgTimeFormat;
+    ProgressBar pb;
     static int lastCheckedId = 0;
 
     @Override
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         tvTime = (TextView) findViewById(R.id.tvTime);
         rgTimeFormat = (RadioGroup) findViewById(R.id.rgTimeFormat);
 
+        pb = findViewById(R.id.progressBar);
+        pb.setVisibility(View.GONE);
         Bundle bndl = new Bundle();
         bndl.putString(TimeLoader.ARGS_TIME_FORMAT, getTimeFormat());
         LoaderManager.getInstance(this).initLoader(LOADER_TIME_ID, bndl, this);
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Log.d(LOG_TAG, "onLoadFinished for loader " + loader.hashCode()
                 + ", result = " + result);
         tvTime.setText(result);
+        pb.setVisibility(View.GONE);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void getTimeClick(View v) {
         Loader<String> loader;
-
+        pb.setVisibility(View.VISIBLE);
         int id = rgTimeFormat.getCheckedRadioButtonId();
         if (id == lastCheckedId) {
             loader = LoaderManager.getInstance(this).getLoader(LOADER_TIME_ID);
