@@ -6,10 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks {
 
@@ -47,17 +56,74 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
 
     @NonNull
     @Override
-    public Loader onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new MyCursorLoader(this,db);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Object data) {
-
+        scAdapter.swapCursor((Cursor) data);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
+
+    }
+
+    public void onButtonClick(View view) {
+        // добавляем запись
+        db.addRec("sometext " + (scAdapter.getCount() + 1), R.drawable.ic_launcher_foreground);
+        // получаем новый курсор с данными
+        LoaderManager.getInstance(this).getLoader(0).forceLoad();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0,CM_DELETE_ID,0,R.string.delete_record);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == CM_DELETE_ID) {
+            // получаем из пункта контекстного меню данные по пункту списка
+            AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item
+                    .getMenuInfo();
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            db.delRec(acmi.id);
+            // получаем новый курсор с данными
+            LoaderManager.getInstance(this).getLoader(0).forceLoad();
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        // закрываем подключение при выходе
+        db.close();
+    }
+
+    static class MyCursorLoader extends CursorLoader {
+
+        DB db;
+
+        public MyCursorLoader(Context context, DB db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            Cursor cursor = db.getAllData();
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return cursor;
+        }
 
     }
 }
