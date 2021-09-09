@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import android.database.ContentObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,12 +36,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         LoaderManager.getInstance(this).initLoader(LOADER_TIME_ID, bndl, this);
         lastCheckedId = rgTimeFormat.getCheckedRadioButtonId();
     }
+    // ЭТО С Loader, а не с asyncTaskLoader
+//    @Override
+//    public Loader<String> onCreateLoader(int id, Bundle args) {
+//        Loader<String> loader = null;
+//        if (id == LOADER_TIME_ID) {
+//            loader = new TimeLoader(this, args);
+//            Log.d(LOG_TAG, "onCreateLoader: " + loader.hashCode());
+//        }
+//        return loader;
+//    }
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
         Loader<String> loader = null;
         if (id == LOADER_TIME_ID) {
-            loader = new TimeLoader(this, args);
+            loader = new TimeAsyncLoader(this,  args);
             Log.d(LOG_TAG, "onCreateLoader: " + loader.hashCode());
         }
         return loader;
@@ -89,5 +100,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void observerClick(View v) {
+        Log.d(LOG_TAG, "observerClick");
+        Loader<String> loader = LoaderManager.getInstance(this).getLoader(LOADER_TIME_ID);
+        assert loader != null;
+        final ContentObserver observer = loader.new ForceLoadContentObserver();
+        v.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                observer.dispatchChange(false,null);
+            }
+        }, 5000);
     }
 }

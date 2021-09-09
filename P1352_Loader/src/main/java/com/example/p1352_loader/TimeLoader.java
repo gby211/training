@@ -40,6 +40,8 @@ public class TimeLoader extends Loader<String> {
     protected void onStartLoading() {
         super.onStartLoading();
         Log.d(LOG_TAG, hashCode() + " onStartLoading");
+        if (takeContentChanged())
+            forceLoad();
     }
 
     @Override
@@ -69,6 +71,7 @@ public class TimeLoader extends Loader<String> {
         super.onReset();
         Log.d(LOG_TAG, hashCode() + " onReset");
     }
+
     void getResultFromTask(String result) {
         deliverResult(result);
     }

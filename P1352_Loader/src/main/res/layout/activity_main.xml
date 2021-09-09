@@ -39,14 +39,14 @@
         android:onClick="getTimeClick"
         android:text="@string/get_time">
     </Button>
+
     <Button
         android:id="@+id/btnObserver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnGetTime"
         android:onClick="observerClick"
-        android:text="@string/observer">
-    </Button>
+        android:text="@string/observer"></Button>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -54,4 +54,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnObserver"
+        android:layout_alignParentStart="true"
+        android:text="Button" />
 </RelativeLayout>
