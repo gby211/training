@@ -12,6 +12,7 @@ import androidx.loader.content.Loader;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks {
 
+    public static final String TAG = "myLogs";
 
     private static final int CM_DELETE_ID = 1;
     ListView lvData;
@@ -39,8 +41,8 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
         db.open();
 
         // формируем столбцы сопоставления
-        String[] from = new String[] { DB.COLUMN_IMG, DB.COLUMN_TXT };
-        int[] to = new int[] { R.id.ivImg, R.id.tvText };
+        String[] from = new String[]{DB.COLUMN_IMG, DB.COLUMN_TXT};
+        int[] to = new int[]{R.id.ivImg, R.id.tvText};
 
         // создаем адаптер и настраиваем список
         scAdapter = new SimpleCursorAdapter(this, R.layout.item, null, from, to, 0);
@@ -57,17 +59,24 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new MyCursorLoader(this,db);
+        Log.d(TAG, "onCreateLoader: " + id);
+        return new MyCursorLoader(this, db);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Object data) {
         scAdapter.swapCursor((Cursor) data);
+        Log.d(TAG, "onLoadFinished: ");
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
+        Log.d(TAG, "onLoaderReset: ");
+    }
 
+    public void pressDelAll(View v){
+        db.delAll();
+        LoaderManager.getInstance(this).getLoader(0).forceLoad();
     }
 
     public void onButtonClick(View view) {
@@ -81,7 +90,7 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(0,CM_DELETE_ID,0,R.string.delete_record);
+        menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
     }
 
     @Override
@@ -116,12 +125,13 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
 
         @Override
         public Cursor loadInBackground() {
+            Log.d(TAG, "loadInBackground: ");
             Cursor cursor = db.getAllData();
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                TimeUnit.SECONDS.sleep(3);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             return cursor;
         }
 

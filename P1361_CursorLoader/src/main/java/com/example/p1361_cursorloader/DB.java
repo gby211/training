@@ -61,6 +61,9 @@ public class DB {
         mDB.delete(DB_TABLE, COLUMN_ID + " = " + id, null);
     }
 
+    public void delAll(){
+        mDB.delete(DB_TABLE,null,null);
+    }
 
 
     private class DBHelper extends SQLiteOpenHelper {
