@@ -103,12 +103,28 @@ public class MainActivity extends AppCompatActivity {
         TextView txt = findViewById(R.id.textView16);
         txt.setBackgroundColor(Color.YELLOW);
 
-        constraintSet.clear(R.id.button5,ConstraintSet.TOP);
-        constraintSet.connect(R.id.button5,ConstraintSet.BOTTOM,R.id.button4,ConstraintSet.TOP,5);
-        constraintSet.setMargin(R.id.button5, ConstraintSet.START, 0);
-        constraintSet.connect(R.id.button5, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
-        constraintSet.connect(R.id.button5, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
-        constraintSet.constrainWidth(R.id.button5, ConstraintSet.MATCH_CONSTRAINT);
+        //constraintSet.clear(R.id.textView16,ConstraintSet.TOP);
+        //constraintSet.connect(R.id.textView16,ConstraintSet.BOTTOM,R.id.button4,ConstraintSet.TOP,5);
+        constraintSet.setMargin(R.id.textView16, ConstraintSet.START, 0);
+        constraintSet.connect(R.id.textView16, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
+        //constraintSet.connect(R.id.textView16, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
+        constraintSet.constrainWidth(R.id.textView16, ConstraintSet.MATCH_CONSTRAINT);
+
+        TransitionManager.beginDelayedTransition(constraintLayout);
+        constraintSet.applyTo(constraintLayout);
+    }
+
+    public void action2(View view) {
+        ConstraintSet constraintSet = new ConstraintSet();
+        ConstraintLayout constraintLayout = findViewById(R.id.conteiner);
+        constraintSet.clone(constraintLayout);
+
+        constraintSet.create(R.id.guideline,ConstraintSet.VERTICAL_GUIDELINE);
+        constraintSet.setGuidelinePercent(R.id.guideline,0.6f);
+
+        constraintSet.connect(R.id.textView17, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
+        constraintSet.connect(R.id.textView18, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
+        constraintSet.connect(R.id.textView19, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
 
         TransitionManager.beginDelayedTransition(constraintLayout);
         constraintSet.applyTo(constraintLayout);
