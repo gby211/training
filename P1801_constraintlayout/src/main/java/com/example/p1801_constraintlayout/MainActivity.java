@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    float tmp = (float) 0.1;
+    int tmp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +39,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                group1.setVisibility(View.VISIBLE);
-                group2.setVisibility(View.VISIBLE);
+                group1.setAlpha(1);
+                group2.setAlpha(1);
+                ConstraintSet constraintSet = new ConstraintSet();
+                constraintSet.clone(constraintLayout);
+                if (tmp == 0) {
+                    constraintSet.setMargin(R.id.button6, ConstraintSet.TOP, 33);
+                    tmp += 1;
+                }else {
+                    constraintSet.setMargin(R.id.button6, ConstraintSet.TOP, 0);
+                    tmp -=1;
+                }
+                constraintSet.applyTo(constraintLayout);
+
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                group2.setVisibility(View.INVISIBLE);
+                group1.setAlpha(0.5F);
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(constraintLayout);
 
@@ -63,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                group1.setVisibility(View.INVISIBLE);
+                group1.setAlpha(0.5F);
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(constraintLayout);
                 changeConstraints(constraintSet);
