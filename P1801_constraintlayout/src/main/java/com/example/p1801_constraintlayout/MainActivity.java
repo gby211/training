@@ -95,4 +95,22 @@ public class MainActivity extends AppCompatActivity {
 
         set.connect(R.id.textView15,ConstraintSet.TOP,R.id.button5,ConstraintSet.BOTTOM,16);
     }
+
+    public void action1(View view) {
+        ConstraintSet constraintSet = new ConstraintSet();
+        ConstraintLayout constraintLayout = findViewById(R.id.conteiner);
+        constraintSet.clone(constraintLayout);
+        TextView txt = findViewById(R.id.textView16);
+        txt.setBackgroundColor(Color.YELLOW);
+
+        constraintSet.clear(R.id.button5,ConstraintSet.TOP);
+        constraintSet.connect(R.id.button5,ConstraintSet.BOTTOM,R.id.button4,ConstraintSet.TOP,5);
+        constraintSet.setMargin(R.id.button5, ConstraintSet.START, 0);
+        constraintSet.connect(R.id.button5, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
+        constraintSet.connect(R.id.button5, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
+        constraintSet.constrainWidth(R.id.button5, ConstraintSet.MATCH_CONSTRAINT);
+
+        TransitionManager.beginDelayedTransition(constraintLayout);
+        constraintSet.applyTo(constraintLayout);
+    }
 }
