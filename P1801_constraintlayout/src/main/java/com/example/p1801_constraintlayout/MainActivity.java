@@ -122,9 +122,13 @@ public class MainActivity extends AppCompatActivity {
         constraintSet.create(R.id.guideline,ConstraintSet.VERTICAL_GUIDELINE);
         constraintSet.setGuidelinePercent(R.id.guideline,0.6f);
 
-        constraintSet.connect(R.id.textView17, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
-        constraintSet.connect(R.id.textView18, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
-        constraintSet.connect(R.id.textView19, ConstraintSet.LEFT, R.id.guideline, ConstraintSet.RIGHT, 0);
+        constraintSet.clear(R.id.textView17,ConstraintSet.END);
+        constraintSet.clear(R.id.textView18,ConstraintSet.END);
+        constraintSet.clear(R.id.textView19,ConstraintSet.END);
+
+        constraintSet.connect(R.id.textView17, ConstraintSet.START, R.id.guideline, ConstraintSet.END, 0);
+        constraintSet.connect(R.id.textView18, ConstraintSet.START, R.id.guideline, ConstraintSet.END, 0);
+        constraintSet.connect(R.id.textView19, ConstraintSet.START, R.id.guideline, ConstraintSet.END, 0);
 
         TransitionManager.beginDelayedTransition(constraintLayout);
         constraintSet.applyTo(constraintLayout);
