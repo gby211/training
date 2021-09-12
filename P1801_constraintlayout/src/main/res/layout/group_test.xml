@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/group2"
-        app:constraint_referenced_ids="button4,button5,button6"/>
+        app:constraint_referenced_ids="button4,button5"/>
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
